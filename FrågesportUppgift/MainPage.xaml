@@ -10,6 +10,6 @@
 
     <Grid RenderTransformOrigin="0.508,0.459">
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="112,0,0,0" Text="TestBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
-        <TextBlock> Hallå </TextBlock>
+        <TextBlock> Hallå där</TextBlock>
     </Grid>
 </Page>
