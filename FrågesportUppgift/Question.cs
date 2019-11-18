@@ -20,6 +20,24 @@ namespace FrågesportUppgift
             correctIndex = i;
         }
 
+
+        public String GetText
+        {
+            get
+            {
+                return text;
+            }
+        }
+
+        public List<String> GetAnswers
+        {
+            get
+            {
+                return answers;
+            }
+        }
+
+
         public bool isCorrect(int index)
         { 
             //Returnera true om indexarna stämmer

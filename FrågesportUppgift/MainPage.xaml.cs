@@ -22,9 +22,17 @@ namespace FrågesportUppgift
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private Manager manager;
+        private List<Question> questions;
+
         public MainPage()
         {
             this.InitializeComponent();
+            questions = new List<Question>();
+            questions.Add(new Question("En testfråga", new List<string> { "a", "b", "c"}, 0));
+
+            qBox.Text = questions[0].GetText;
+
         }
     }
 }
