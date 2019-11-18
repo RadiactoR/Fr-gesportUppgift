@@ -8,5 +8,10 @@ namespace FrågesportUppgift
 {
     class Manager
     {
+        
+        public Manager()
+        {
+
+        }
     }
 }
