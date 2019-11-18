@@ -8,10 +8,22 @@ namespace FrågesportUppgift
 {
     class Manager
     {
-        
-        public Manager()
-        {
+        private List<Question> questions;
+        private Question currentQuestion;
 
+        public Manager(List<Question> q)
+        {
+            questions = q;
+        }
+
+
+
+        public Question CurrentQuestion
+        {
+            get
+            {
+                return currentQuestion;
+            }
         }
     }
 }

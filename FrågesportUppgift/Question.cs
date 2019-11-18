@@ -6,7 +6,31 @@ using System.Threading.Tasks;
 
 namespace FrågesportUppgift
 {
+
     class Question
     {
+        private List<String> answers;
+        private String text;
+        private int correctIndex;
+
+        public Question(String t, List<String> ans, int i)
+        {
+            text = t;
+            answers = ans;
+            correctIndex = i;
+        }
+
+        public bool isCorrect(int index)
+        { 
+            //Returnera true om indexarna stämmer
+            if(index == correctIndex)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
