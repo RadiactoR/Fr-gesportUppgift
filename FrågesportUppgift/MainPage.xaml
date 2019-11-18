@@ -9,7 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid RenderTransformOrigin="0.508,0.459">
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="112,0,0,0" Text="TestBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
-        <TextBlock> Hallå där</TextBlock>
+        <TextBox x:Name="textBox" HorizontalAlignment="Center" Text="TestBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Center" Margin="0 250 0 0"> Hallå där</TextBlock>
     </Grid>
 </Page>
