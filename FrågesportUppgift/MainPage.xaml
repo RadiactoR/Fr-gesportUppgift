@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-
+    <Grid RenderTransformOrigin="0.508,0.459">
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="112,0,0,0" Text="TestBox" TextWrapping="Wrap" VerticalAlignment="Center"/>
     </Grid>
 </Page>
