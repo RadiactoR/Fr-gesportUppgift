@@ -22,23 +22,34 @@ namespace FrågesportUppgift
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private Manager manager;
         private List<Question> questions;
         private int correctAnswers = 0;
         private Question currentQuestion;
         private Random rand = new Random();
         private int noQuestions = 2;
+        private bool restart = false;
 
         public MainPage()
         {
             this.InitializeComponent();
             questions = new List<Question>();
 
-            questions.Add(new Question("Vad heter Sveriges huvudstad?", new List<string> { "Oslo", "Stockholm", "Köpenhamn"}, 1));
-            questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
 
             //Applicera
+            Prepare();
             PrintQuestion(questions[rand.Next(0, questions.Count)]);
+        }
+
+        private void Prepare()
+        {
+            restart = false;
+            correctAnswers = 0;
+
+            a2.Visibility = Visibility.Visible;
+            a3.Visibility = Visibility.Visible;
+
+            questions.Add(new Question("Vad heter Sveriges huvudstad?", new List<string> { "Oslo", "Stockholm", "Köpenhamn" }, 1));
+            questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
         }
 
 
@@ -53,7 +64,11 @@ namespace FrågesportUppgift
             else
             {
                 qBox.Text = "Tack för att du spelade!";
-                scoreBox.Text = "";
+                scoreBox.Text = correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
+                restart = true;
+                a1.Content = "Spela igen";
+                a2.Visibility = Visibility.Collapsed;
+                a3.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -88,7 +103,15 @@ namespace FrågesportUppgift
 
         private void a1_Click(object sender, RoutedEventArgs e)
         {
-            Answer(0);
+            if (restart == false)
+            {
+                Answer(0);
+            }
+            else
+            {
+                Prepare();
+                PrintQuestion(questions[rand.Next(0, questions.Count)]);
+            }
         }
 
         private void a2_Click(object sender, RoutedEventArgs e)
