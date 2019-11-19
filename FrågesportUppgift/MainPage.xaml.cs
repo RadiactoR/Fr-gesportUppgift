@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.ViewManagement;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -34,7 +35,6 @@ namespace FrågesportUppgift
             this.InitializeComponent();
             questions = new List<Question>();
 
-
             //Applicera
             Prepare();
             PrintQuestion(questions[rand.Next(0, questions.Count)]);
@@ -48,7 +48,8 @@ namespace FrågesportUppgift
             a2.Visibility = Visibility.Visible;
             a3.Visibility = Visibility.Visible;
 
-            questions.Add(new Question("Vad heter Sveriges huvudstad?", new List<string> { "Oslo", "Stockholm", "Köpenhamn" }, 1));
+            //Här läggs alla frågor
+            questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
             questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
         }
 

@@ -32,7 +32,7 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="FrågesportUppgift.App">
       <uap:VisualElements
-        DisplayName="FrågesportUppgift"
+        DisplayName="Frågesport Deluxe"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="FrågesportUppgift"
