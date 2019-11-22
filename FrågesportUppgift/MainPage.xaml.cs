@@ -27,7 +27,7 @@ namespace FrågesportUppgift
         private int correctAnswers = 0;
         private Question currentQuestion;
         private Random rand = new Random();
-        private int noQuestions = 2;
+        private int noQuestions;
         private bool restart = false;
 
         public MainPage()
@@ -51,6 +51,18 @@ namespace FrågesportUppgift
             //Här läggs alla frågor
             questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
             questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
+            questions.Add(new Question("Hur lång är en engelsk mile?", new List<string> { "10km", "1,6km", "6km" }, 1));
+            questions.Add(new Question("Vad är Gabons huvudstad?", new List<string> { "Lusaka", "Libreville", "Lima" }, 1));
+            questions.Add(new Question("Vem i serien Vänner blir aldrig gravid?", new List<string> { "Rachel", "Phoebe", "Monica" }, 2));
+            questions.Add(new Question("Vilken är den största ön i världen?", new List<string> { "Grönland", "Australien", "Madagaskar" }, 0));
+            questions.Add(new Question("Hur många tänder finns det i en vuxens mun?", new List<string> { "20", "32", "38" }, 1));
+            questions.Add(new Question("Vem är den nuvarande påven?", new List<string> { "Francis", "Benedictus", "St. Paul John II" }, 0));
+            questions.Add(new Question("Var ligger Niagara Falls?", new List<string> { "Ontario", "Vancouver", "Toronto" }, 0));
+            questions.Add(new Question("Vad är USAs nationalsport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
+            questions.Add(new Question("Vad är USAs nationalrätt?", new List<string> { "Hamburgare", "Pizza", "Friterad kyckling" }, 0));
+            questions.Add(new Question("Vem googlas med än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
+
+            noQuestions = questions.Count;
         }
 
 
