@@ -6,15 +6,15 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#5B5DA3">
 
-    
+
     <Grid>
-        <TextBlock HorizontalAlignment="Center" Height="30" Margin="0 -290 0 0" FontSize="18">Frågesport Deluxe</TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="20" Margin="0 -235 0 0" FontSize="13" Name="scoreBox">Poäng här</TextBlock>
-        <TextBlock HorizontalAlignment="Center" Height="20" Margin="0 -200 0 0" Name="qBox">Frågetext här</TextBlock>
-        <Button Name="a1" Click="a1_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 -100 0 0">Svar 1</Button>
-        <Button Name="a2" Click="a2_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 0 0 0">Svar 2</Button>
-        <Button Name="a3" Click="a3_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 100 0 0">Svar 3</Button>
+        <TextBlock Foreground="#FFF" HorizontalAlignment="Center" Height="30" Margin="0 -290 0 0" FontSize="18">Frågesport Deluxe</TextBlock>
+        <TextBlock Foreground="#FFF" HorizontalAlignment="Center" Height="20" Margin="0 -235 0 0" FontSize="13" Name="scoreBox">Poäng här</TextBlock>
+        <TextBlock Foreground="#FFF" HorizontalAlignment="Center" Height="20" Margin="0 -200 0 0" Name="qBox">Frågetext här</TextBlock>
+        <Button Background="#45477C" Foreground="#FFF" Name="a1" Click="a1_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 -100 0 0">Svar 1</Button>
+        <Button Background="#45477C" Foreground="#FFF" Name="a2" Click="a2_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 0 0 0">Svar 2</Button>
+        <Button Background="#45477C" Foreground="#FFF" Name="a3" Click="a3_Click" HorizontalAlignment="Center" MaxWidth="200" Width="150" Margin="0 100 0 0">Svar 3</Button>
     </Grid>
 </Page>

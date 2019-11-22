@@ -29,6 +29,7 @@ namespace FrågesportUppgift
         private Random rand = new Random();
         private int noQuestions;
         private bool restart = false;
+        private int progress = 0;
 
         public MainPage()
         {
@@ -44,6 +45,7 @@ namespace FrågesportUppgift
         {
             restart = false;
             correctAnswers = 0;
+            progress = 0;
 
             a2.Visibility = Visibility.Visible;
             a3.Visibility = Visibility.Visible;
@@ -60,7 +62,7 @@ namespace FrågesportUppgift
             questions.Add(new Question("Var ligger Niagara Falls?", new List<string> { "Ontario", "Vancouver", "Toronto" }, 0));
             questions.Add(new Question("Vad är USAs nationalsport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
             questions.Add(new Question("Vad är USAs nationalrätt?", new List<string> { "Hamburgare", "Pizza", "Friterad kyckling" }, 0));
-            questions.Add(new Question("Vem googlas med än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
+            questions.Add(new Question("Vem googlas mer än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
 
             noQuestions = questions.Count;
         }
@@ -104,7 +106,8 @@ namespace FrågesportUppgift
         private void PrintQuestion(Question q)
         {
             currentQuestion = q;
-            scoreBox.Text = correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
+            progress += 1;
+            scoreBox.Text = "Fråga " + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
             qBox.Text = q.GetText;
             a1.Content = q.GetAnswers[0];
             a2.Content = q.GetAnswers[1];
