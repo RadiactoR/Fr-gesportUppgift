@@ -21,6 +21,9 @@ namespace FrågesportUppgift
         }
 
 
+        /// <summary>
+        /// Returns the text of this question as a string
+        /// </summary>
         public String GetText
         {
             get
@@ -29,6 +32,9 @@ namespace FrågesportUppgift
             }
         }
 
+        /// <summary>
+        /// Returns the associated answers as a list of strings
+        /// </summary>
         public List<String> GetAnswers
         {
             get
@@ -38,6 +44,11 @@ namespace FrågesportUppgift
         }
 
 
+        /// <summary>
+        /// Returns true if the index matches the "correct" index, returns false otherwise
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public bool isCorrect(int index)
         { 
             //Returnera true om indexarna stämmer
