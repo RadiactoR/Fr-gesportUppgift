@@ -19,7 +19,7 @@ using Windows.UI.ViewManagement;
 namespace FrågesportUppgift
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// The main page
     /// </summary>
     public sealed partial class MainPage : Page
     {
@@ -41,6 +41,9 @@ namespace FrågesportUppgift
             PrintQuestion(questions[rand.Next(0, questions.Count)]);
         }
 
+        /// <summary>
+        /// Sets up all the variables, questions and the interface
+        /// </summary>
         private void Prepare()
         {
             restart = false;
@@ -68,7 +71,9 @@ namespace FrågesportUppgift
         }
 
 
-
+        /// <summary>
+        /// Gets the a random question from the ones that remain in the list
+        /// </summary>
         private void GetNextQuestion()
         {
             questions.Remove(currentQuestion);
@@ -88,6 +93,10 @@ namespace FrågesportUppgift
         }
 
 
+        /// <summary>
+        /// Checks if the answer is correct or not
+        /// </summary>
+        /// <param name="i">The question index</param>
         private void Answer(int i)
         {
             if (currentQuestion.isCorrect(i))
@@ -103,6 +112,10 @@ namespace FrågesportUppgift
             }
         }
 
+        /// <summary>
+        /// Displays the specified question and sets the text of the buttons as the answers
+        /// </summary>
+        /// <param name="q">The question to be displayed</param>
         private void PrintQuestion(Question q)
         {
             currentQuestion = q;
@@ -116,7 +129,11 @@ namespace FrågesportUppgift
 
 
 
-
+        /// <summary>
+        /// Answer #1
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void a1_Click(object sender, RoutedEventArgs e)
         {
             if (restart == false)
@@ -130,11 +147,23 @@ namespace FrågesportUppgift
             }
         }
 
+
+        /// <summary>
+        /// Answer #2
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void a2_Click(object sender, RoutedEventArgs e)
         {
             Answer(1);
         }
 
+
+        /// <summary>
+        /// Answer #3
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void a3_Click(object sender, RoutedEventArgs e)
         {
             Answer(2);
