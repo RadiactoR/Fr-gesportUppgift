@@ -13,9 +13,11 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using Windows.Storage;
+using System.Threading.Tasks;
+using System.Globalization;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace FrågesportUppgift
 {
     /// <summary>
@@ -31,20 +33,65 @@ namespace FrågesportUppgift
         private bool restart = false;
         private int progress = 0;
 
+        private bool english = false;
+
         public MainPage()
         {
             this.InitializeComponent();
             questions = new List<Question>();
 
+            if (System.Threading.Thread.CurrentThread.CurrentUICulture.Name == "en-US")
+            {
+                english = true;
+            }
+
+            if(english == true)
+            {
+                titleBox.Text = "Quiz Deluxe";
+            }
+
             //Applicera
             Prepare();
-            PrintQuestion(questions[rand.Next(0, questions.Count)]);
+            /*PrintQuestion(questions[rand.Next(0, questions.Count)]);*/
+
         }
 
         /// <summary>
         /// Sets up all the variables, questions and the interface
         /// </summary>
-        private void Prepare()
+        /// 
+        async Task LoadQuestions()
+        {
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile file;
+            string fileContent = "";
+
+            if (english == false)
+            {
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/questions_sv.txt"));
+                fileContent = await Windows.Storage.FileIO.ReadTextAsync(file);
+            }
+
+            else if(english == true)
+            {
+                file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Assets/questions_en.txt"));
+                fileContent = await Windows.Storage.FileIO.ReadTextAsync(file);
+            }
+
+            //Dela upp i rader
+            string[] lines = fileContent.Split("*");
+            
+            //Dela upp i parametrar
+            foreach(string line in lines)
+            {
+                string[] info = line.Split(",");
+                questions.Add(new Question(info[0].Trim(), info[1].Trim(), info[2].Trim(), info[3].Trim(), int.Parse(info[4].Trim())));
+
+            }
+
+        }
+
+        private async void Prepare()
         {
             restart = false;
             correctAnswers = 0;
@@ -54,7 +101,7 @@ namespace FrågesportUppgift
             a3.Visibility = Visibility.Visible;
 
             //Här läggs alla frågor
-            questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
+            /*questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
             questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
             questions.Add(new Question("Hur lång är en engelsk mile?", new List<string> { "10km", "1,6km", "6km" }, 1));
             questions.Add(new Question("Vad är Gabons huvudstad?", new List<string> { "Lusaka", "Libreville", "Lima" }, 1));
@@ -66,13 +113,15 @@ namespace FrågesportUppgift
             questions.Add(new Question("Vad är USAs nationalsport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
             questions.Add(new Question("Vad är USAs nationalrätt?", new List<string> { "Hamburgare", "Pizza", "Friterad kyckling" }, 0));
             questions.Add(new Question("Vem googlas mer än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
-
+            */
+            await Task.Run(() => LoadQuestions());
             noQuestions = questions.Count;
+            PrintQuestion(questions[rand.Next(0, questions.Count)]);
         }
 
 
         /// <summary>
-        /// Gets the a random question from the ones that remain in the list
+        /// Gets a random question from the ones that remain in the list
         /// </summary>
         private void GetNextQuestion()
         {
@@ -83,10 +132,23 @@ namespace FrågesportUppgift
             }
             else
             {
-                qBox.Text = "Tack för att du spelade!";
-                scoreBox.Text = correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
-                restart = true;
-                a1.Content = "Spela igen";
+                if (english == false)
+                {
+                    qBox.Text = "Tack för att du spelade!";
+                    restart = true;
+                    a1.Content = "Spela igen";
+                    scoreBox.Text = correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
+
+                }
+
+                else if (english == true)
+                {
+                    qBox.Text = "Thanks for playing!";
+                    restart = true;
+                    a1.Content = "Play again";
+                    scoreBox.Text = correctAnswers.ToString() + "/" + noQuestions.ToString() + " points";
+                }
+
                 a2.Visibility = Visibility.Collapsed;
                 a3.Visibility = Visibility.Collapsed;
             }
@@ -120,8 +182,18 @@ namespace FrågesportUppgift
         {
             currentQuestion = q;
             progress += 1;
-            scoreBox.Text = "Fråga " + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
-            qBox.Text = q.GetText;
+
+            if (english == false)
+            {
+                scoreBox.Text = "Fråga " + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
+            }
+
+            else if (english == true)
+            {
+                scoreBox.Text = "Question " + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " points";
+            }
+
+            qBox.Text = q.GetText + "?";
             a1.Content = q.GetAnswers[0];
             a2.Content = q.GetAnswers[1];
             a3.Content = q.GetAnswers[2];
@@ -130,7 +202,7 @@ namespace FrågesportUppgift
 
 
         /// <summary>
-        /// Answer #1
+        /// Sends answer index 0
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -143,13 +215,12 @@ namespace FrågesportUppgift
             else
             {
                 Prepare();
-                PrintQuestion(questions[rand.Next(0, questions.Count)]);
             }
         }
 
 
         /// <summary>
-        /// Answer #2
+        /// Sends answer index 1
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -160,7 +231,7 @@ namespace FrågesportUppgift
 
 
         /// <summary>
-        /// Answer #3
+        /// Sends answer index 2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
