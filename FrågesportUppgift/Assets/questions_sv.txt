@@ -1,0 +1,3 @@
+Vad heter Norges huvudstad,Stockholm,Storbritannien,Oslo,2*
+Vad heter Sveriges huvudstad,Stockholm,Storbritannien,Oslo,0*
+Vad heter USAs huvudstad,Washington D.C,Storbritannien,Oslo,0

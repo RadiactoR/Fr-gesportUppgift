@@ -13,10 +13,13 @@ namespace FrågesportUppgift
         private String text;
         private int correctIndex;
 
-        public Question(String t, List<String> ans, int i)
+        public Question(String t, string ans1, string ans2, string ans3, int i)
         {
+            answers = new List<string>();
             text = t;
-            answers = ans;
+            answers.Add(ans1);
+            answers.Add(ans2);
+            answers.Add(ans3);
             correctIndex = i;
         }
 
