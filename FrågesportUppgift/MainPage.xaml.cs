@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
+using Windows.Globalization;
+using System.Threading;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -54,18 +56,38 @@ namespace FrågesportUppgift
             a3.Visibility = Visibility.Visible;
 
             //Här läggs alla frågor
-            questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
-            questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
-            questions.Add(new Question("Hur lång är en engelsk mile?", new List<string> { "10km", "1,6km", "6km" }, 1));
-            questions.Add(new Question("Vad är Gabons huvudstad?", new List<string> { "Lusaka", "Libreville", "Lima" }, 1));
-            questions.Add(new Question("Vem i serien Vänner blir aldrig gravid?", new List<string> { "Rachel", "Phoebe", "Monica" }, 2));
-            questions.Add(new Question("Vilken är den största ön i världen?", new List<string> { "Grönland", "Australien", "Madagaskar" }, 0));
-            questions.Add(new Question("Hur många tänder finns det i en vuxens mun?", new List<string> { "20", "32", "38" }, 1));
-            questions.Add(new Question("Vem är den nuvarande påven?", new List<string> { "Francis", "Benedictus", "St. Paul John II" }, 0));
-            questions.Add(new Question("Var ligger Niagara Falls?", new List<string> { "Ontario", "Vancouver", "Toronto" }, 0));
-            questions.Add(new Question("Vad är USAs nationalsport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
-            questions.Add(new Question("Vad är USAs nationalrätt?", new List<string> { "Hamburgare", "Pizza", "Friterad kyckling" }, 0));
-            questions.Add(new Question("Vem googlas mer än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
+
+            if (Thread.CurrentThread.CurrentUICulture.Name == "sv")
+            {
+                questions.Add(new Question("Vad blir 2 + 2?", new List<string> { "4", "24", "1^2" }, 0));
+                questions.Add(new Question("Vad heter Norges huvudstad?", new List<string> { "Stockholm", "Storbritannien", "Oslo" }, 2));
+                questions.Add(new Question("Hur lång är en engelsk mile?", new List<string> { "10km", "1,6km", "6km" }, 1));
+                questions.Add(new Question("Vad är Gabons huvudstad?", new List<string> { "Lusaka", "Libreville", "Lima" }, 1));
+                questions.Add(new Question("Vem i serien 'Vänner' blir aldrig gravid?", new List<string> { "Rachel", "Phoebe", "Monica" }, 2));
+                questions.Add(new Question("Vilken är den största ön i världen?", new List<string> { "Grönland", "Australien", "Madagaskar" }, 0));
+                questions.Add(new Question("Hur många tänder finns det i en vuxens mun?", new List<string> { "20", "32", "38" }, 1));
+                questions.Add(new Question("Vem är den nuvarande påven?", new List<string> { "Francis", "Benedictus", "St. Paul John II" }, 0));
+                questions.Add(new Question("Var ligger Niagara Falls?", new List<string> { "Ontario", "Vancouver", "Toronto" }, 0));
+                questions.Add(new Question("Vad är USAs nationalsport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
+                questions.Add(new Question("Vad är USAs nationalrätt?", new List<string> { "Hamburgare", "Pizza", "Friterad kyckling" }, 0));
+                questions.Add(new Question("Vem googlas mer än Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
+            }
+            else if (Thread.CurrentThread.CurrentUICulture.Name == "en")
+            {
+                questions.Add(new Question("What is 2 + 2 equal to?", new List<string> { "4", "24", "1^2" }, 0));
+                questions.Add(new Question("Which city is the capitol of Norway?", new List<string> { "Stockholm", "Great Britain", "Oslo" }, 2));
+                questions.Add(new Question("How far is an english mile in km?", new List<string> { "10km", "1,6km", "6km" }, 1));
+                questions.Add(new Question("Which city is the capitol of Gabon?", new List<string> { "Lusaka", "Libreville", "Lima" }, 1));
+                questions.Add(new Question("Who in the series 'Friends' never gets pregnant?", new List<string> { "Rachel", "Phoebe", "Monica" }, 2));
+                questions.Add(new Question("Which island is the worlds largest?", new List<string> { "Greenland", "Australia", "Madagaskar" }, 0));
+                questions.Add(new Question("How many teeth do a fully grown human have?", new List<string> { "20", "32", "38" }, 1));
+                questions.Add(new Question("Who is the current pope?", new List<string> { "Francis", "Benedictus", "St. Paul John II" }, 0));
+                questions.Add(new Question("Where do you find the 'Niagara Falls'?", new List<string> { "Ontario", "Vancouver", "Toronto" }, 0));
+                questions.Add(new Question("What's the US national sport?", new List<string> { "Rugby", "Hockey", "Baseball" }, 2));
+                questions.Add(new Question("What's the US national dish?", new List<string> { "Hamburger", "Pizza", "Fried chicken" }, 0));
+                questions.Add(new Question("Who is googled more than Jesus?", new List<string> { "Justin Bieber", "Donald Trump", "Ed Sheeran" }, 0));
+            }
+
 
             noQuestions = questions.Count;
         }
@@ -118,9 +140,10 @@ namespace FrågesportUppgift
         /// <param name="q">The question to be displayed</param>
         private void PrintQuestion(Question q)
         {
+            var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
             currentQuestion = q;
             progress += 1;
-            scoreBox.Text = "Fråga " + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " poäng";
+            scoreBox.Text = resourceLoader.GetString("Question") + progress.ToString() + " - " + correctAnswers.ToString() + "/" + noQuestions.ToString() + " " + resourceLoader.GetString("Score");
             qBox.Text = q.GetText;
             a1.Content = q.GetAnswers[0];
             a2.Content = q.GetAnswers[1];
